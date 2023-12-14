@@ -1,34 +1,32 @@
-import React from "react";
-import { FaArrowRight } from "react-icons/fa";
+// AnuncioCard.jsx
+import React from 'react';
 
+const AnuncioCard = ({ anuncio }) => {
+  // Verifica se 'anuncio' é indefinido ou nulo
+  if (!anuncio) {
+    return <div>Error: Anúncio indefinido.</div>;
+  }
 
-import {
-  Container,
-  Description,
-  Img,
-  Itens
-} from "./styles";
-import { Link } from "react-router-dom";
+  // Extrai as propriedades do objeto 'anuncio' usando desestruturação
+  const { filename, modelo, marca, ano, preco, km } = anuncio;
 
+  // Verifica se as propriedades necessárias estão presentes
+  if (!filename || !modelo || !marca || !ano || !preco || !km) {
+    return <div>Error: Propriedades de anúncio ausentes.</div>;
+  }
 
-const Card = () => {
   return (
-    <Container>
-      <Link to = '/anuncio'><Img>
-        <img src="https://media.istockphoto.com/id/1744546629/pt/foto/japanese-park-parking-lot.jpg?s=2048x2048&w=is&k=20&c=fn61HGiyybTcX0fv1eCXl0koOLzmiThJbOWtZazrlm0=" alt="" />
-      </Img></Link>
-      <Description>
-        <h4> Nome: Lorem </h4>
-        <Itens>
-            <span>Modelo: Lorem 1  </span>
-            <span>Marca: Lorem 2 </span>
-            <span>Ano: Lorem 3 </span>
-            <span>Valor: Lorem 4 </span>
-        </Itens>
-        <Link to='/anuncio' >Detalhes<FaArrowRight/></Link>
-      </Description>
-    </Container>
-  )
-}
+    <div className="card">
+      <img src={`http://localhost:5000/uploads/${filename}`} alt={modelo} />
+      <div className="card-body">
+        <h5 className="card-title">{modelo}</h5>
+        <p className="card-text">{marca}</p>
+        <p className="card-text">{ano}</p>
+        <p className="card-text">{preco}</p>
+        <p className="card-text">{km}</p>
+      </div>
+    </div>
+  );
+};
 
-export default Card;
+export default AnuncioCard;

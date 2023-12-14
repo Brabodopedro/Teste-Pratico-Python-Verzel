@@ -10,9 +10,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Anuncio from "../pages/anuncio";
 import Login from "../pages/Login";
-import Cadastro from "../pages/Cadastro"
 import CadastroVeiculoForm from "../pages/Anunciar";
 import Anuncios from "../pages/anuncios";
+import { Users } from "../pages/Cadastro/index2";
 
 const RouterApp  = () => {
 
@@ -23,10 +23,10 @@ const RouterApp  = () => {
             <Route path="/" element={<Home/>}/>
             <Route path="/anuncio" element={<Anuncio/>}/>
             <Route path="/login" element={<Login/>}/>
-            <Route path="/cadastro" element={<Cadastro/>}/>
             <Route path="/anunciar" element={<CadastroVeiculoForm/>}/>
             <Route path="/anuncios" element={<Anuncios/>}/>
             <Route path="*" element={<Error/>}/>
+            <Route path="/cadastro" Component={Users}/>
         </Routes>
         <Footer/>
     </BrowserRouter>

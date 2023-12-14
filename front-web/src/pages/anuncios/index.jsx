@@ -1,25 +1,32 @@
-import React, { Fragment } from "react";
-import { Header, Wrapper } from "./styles";
-import Card from "../../components/Card";
-
+import React, { useState, useEffect } from 'react';
+import AnuncioCard from '../../components/Card';
+import { Wrapper } from './styles';
 
 const Anuncios = () => {
-  let Cards = [];
-  for (let i = 0; i < 4; i++){
-    Cards.push(<Card key={i}/>)
-  }
+  const [anuncios, setAnuncios] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/anuncios');
+        const data = await response.json();
+        setAnuncios(data);
+        console.log(data);
+      } catch (error) {
+        console.error('Erro ao buscar anúncios:', error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+
   return (
-    <Fragment>
-      <Header>
-        <h2>As Melhores escolhas Aqui</h2>
-      </Header>
-      <Wrapper>
-        {Cards}
-        {Cards}
-        {Cards}
-      </Wrapper>
-    </Fragment>
-  )
-}
+    <Wrapper>
+      {anuncios.map((anuncio) => (
+        <AnuncioCard key={anuncio._id} anuncio={anuncio} />
+      ))}
+    </Wrapper>
+  );
+};
 
 export default Anuncios;
